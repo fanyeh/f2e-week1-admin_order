@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Input, Label, Select, LabelContainer } from './InputStyles';
+import { Input, Label, Select, LabelContainer } from '../../components/InputStyles';
 import faker from 'faker';
 import styled from 'styled-components';
 class SpecInputs extends Component {

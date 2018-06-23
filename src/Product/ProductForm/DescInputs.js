@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Input, Label, LabelContainer, Title, TextArea } from './InputStyles';
+import { Input, Label, LabelContainer, Title, TextArea } from '../../components/InputStyles';
 import faker from 'faker';
 import styled from 'styled-components';
 class DescInputs extends Component {

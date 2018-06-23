@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import firebase from '../firebase';
-import Product from './Product';
-// import { dataURLtoFile, formDataToObject } from './helpers';
+import ProductForm from './ProductForm';
 class EditProduct extends Component {
   async componentDidMount() {
     const id = '-LFPBtNzLiRm2O49HUe8';
@@ -29,7 +28,7 @@ class EditProduct extends Component {
   };
 
   render() {
-    return <Product {...this.childProps()} />;
+    return <ProductForm {...this.childProps()} />;
   }
 }
 

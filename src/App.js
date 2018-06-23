@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import './App.css';
-import ProductList from './Products/ProductList';
+import Product from './Product';
 import Order from './Order';
 import Home from './Home';
-const pages = {
-  order: <Order />,
-  product: <ProductList />,
+import './App.css';
+
+const PageComponents = {
   home: <Home />,
+  order: <Order />,
+  product: <Product />,
 };
 class App extends Component {
   state = { currentPage: 'home' };
@@ -17,29 +18,24 @@ class App extends Component {
   };
 
   render() {
-    const page = pages[this.state.currentPage];
+    const { currentPage } = this.state;
+    const PageComponent = PageComponents[currentPage];
     return (
       <div className="App">
         <Header>
           <Nav>
             <span>Shoptime</span>
             <ul onClick={this.changePage}>
-              {/* <li>home</li> */}
-              <NavItem id="home" select={this.state.currentPage === 'home'}>
-                home
-              </NavItem>
-              <NavItem id="order" select={this.state.currentPage === 'order'}>
-                order
-              </NavItem>
-              <NavItem id="product" select={this.state.currentPage === 'product'}>
-                product
-              </NavItem>
+              {Object.keys(PageComponents).map(key => (
+                <NavItem id={key} key={key} select={currentPage === key}>
+                  {key}
+                </NavItem>
+              ))}
             </ul>
-
-            <span htmlFor="">admin</span>
+            <span>admin</span>
           </Nav>
         </Header>
-        {page}
+        {PageComponent}
       </div>
     );
   }

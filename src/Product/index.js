@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-import firebase from '../firebase';
 import styled from 'styled-components';
-import { Button } from './Product/InputStyles';
+import firebase from '../firebase';
+import { Button } from '../components/InputStyles';
+import MenuButton from '../components/MenuButton';
+import Checkbox from '../components/Checkbox';
+import Menu from '../components/Menu';
 import NewProduct from './NewProduct';
-import Menu from './Menu';
-import MenuButton from './MenuButton';
-import Checkbox from './Checkbox';
+
 class ProductList extends Component {
   state = { products: {}, specs: {}, newProduct: false };
 

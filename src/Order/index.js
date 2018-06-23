@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { recordCreator } from './Products/helpers';
-import Menu from './Products/Menu';
-import MenuButton from './Products/MenuButton';
-import Checkbox from './Products/Checkbox';
+import { recordCreator } from '../components/helpers';
+import Menu from '../components/Menu';
+import MenuButton from '../components/MenuButton';
+import Checkbox from '../components/Checkbox';
 
 const headers = [
   { key: 'cust', name: 'Customer' },
@@ -49,7 +49,12 @@ class Order extends Component {
           <MenuButton name="edit section" type="edit">
             {headers.map(header => (
               <MenuItem key={header.key} onClick={e => e.stopPropagation()}>
-                <Checkbox noarrow trigger={() => this.changeHandler(header.key)} />
+                <Checkbox
+                  noarrow
+                  changeHandler={() => this.changeHandler(header.key)}
+                  checked={checks[header.key]}
+                  id={header.key}
+                />
                 <HeaderName>{header.name}</HeaderName>
               </MenuItem>
             ))}

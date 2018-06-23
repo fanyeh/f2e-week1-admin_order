@@ -4,8 +4,8 @@ import FileDrop from './FileDrop';
 import SpecInputs from './SpecInputs';
 import DescInputs from './DescInputs';
 import PreviewImage from './PreviewImage';
-import { Button } from './InputStyles';
-class NewProduct extends Component {
+import { Button } from '../../components/InputStyles';
+class ProductForm extends Component {
   state = {
     images: [],
     specs: [{ ref: React.createRef(), id: btoa(Date.now()) }],
@@ -55,7 +55,7 @@ class NewProduct extends Component {
   }
 }
 
-export default NewProduct;
+export default ProductForm;
 
 const Wrapper = styled.div`
   display: flex;

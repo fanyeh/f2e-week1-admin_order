@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import Chart from 'chart.js';
+import Toggler from '../components/Toggler';
+import { chartData } from '../components/helpers';
 import TransactionItem from './TransactionItem';
 import LastestOrderItem from './LastestOrderItem';
-import Toggler from '../Products/Toggler';
-import Chart from 'chart.js';
-import { chartData } from '../Products/helpers';
 class Home extends Component {
   chartRef = React.createRef();
   state = {

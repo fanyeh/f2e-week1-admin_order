@@ -4,25 +4,15 @@ import styled, { css } from 'styled-components';
 class Checkbox extends Component {
   static defaultProps = {
     checked: true,
+    changeHandler: () => {},
   };
-  state = { checked: this.props.checked, id: btoa(Date.now()) };
-  changeHandler = e => {
-    this.setState(({ checked }) => ({ checked: !checked }));
-    const trigger = this.props.trigger;
-    if (trigger) {
-      trigger();
-    }
-  };
+
   render() {
+    const { checked, id, changeHandler, noarrow } = this.props;
     return (
       <Wrapper>
-        <StyledCheckbox
-          type="checkbox"
-          checked={this.state.checked}
-          onChange={this.changeHandler}
-          id={this.state.id}
-        />
-        <StyledCheckmark htmlFor={this.state.id} arrow={this.props.noarrow ? false : true} />
+        <StyledCheckbox type="checkbox" checked={checked} onChange={changeHandler} id={id} />
+        <StyledCheckmark htmlFor={id} arrow={noarrow ? false : true} />
       </Wrapper>
     );
   }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import firebase from '../firebase';
-import Product from './Product';
-import { dataURLtoFile, formDataToObject } from './helpers';
+import ProductForm from './ProductForm';
+import { dataURLtoFile, formDataToObject } from '../components/helpers';
 class NewProduct extends Component {
   static defaultProps = {
     handler: () => {},
@@ -61,7 +61,7 @@ class NewProduct extends Component {
   };
 
   render() {
-    return <Product {...this.childProps()} />;
+    return <ProductForm {...this.childProps()} />;
   }
 }
 

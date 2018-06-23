@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import faker from 'faker';
 class LatestOrderItem extends Component {
   render() {
     return (

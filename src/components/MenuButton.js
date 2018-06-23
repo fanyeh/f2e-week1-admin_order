@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import { Button } from './Product/InputStyles';
+import { Button } from './InputStyles';
 import Toggler from './Toggler';
 
 const color = {
@@ -22,12 +22,7 @@ class MenuButton extends Component {
             <StyledButton id={toggler.id} onClick={toggler.toggle} color={color[this.props.type]}>
               {this.props.name}
             </StyledButton>
-            {toggler.on && (
-              <ItemContainer>
-                {this.props.children}
-                {/* {this.props.children.map((item, index) => <Item key={index}>{item}</Item>)} */}
-              </ItemContainer>
-            )}
+            {toggler.on && <ItemContainer>{this.props.children}</ItemContainer>}
           </Wrapper>
         )}
       </Toggler>
@@ -45,8 +40,6 @@ const StyledButton = styled(Button)`
   position: relative;
   padding-right: 1.5rem;
   background: ${props => props.color};
-  /* color: ${props => (props.color === 'none' ? 'black' : 'white')}; */
-  /* letter-spacing: ${props => props.color === 'none' && '0'}; */
   &:after {
     content: '';
     position: absolute;
@@ -71,14 +64,4 @@ const ItemContainer = styled.div`
   left: 50%;
   transform: translate(-50%, 100%);
   z-index: 999;
-`;
-
-const Item = styled.div`
-  display: flex;
-  padding: 0.5rem 1.25rem;
-  text-transform: uppercase;
-  &:hover {
-    background: black;
-    color: white;
-  }
 `;
