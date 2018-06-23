@@ -6,36 +6,51 @@ import MenuButton from './Products/MenuButton';
 import Checkbox from './Products/Checkbox';
 
 const headers = [
-  'Customer',
-  'Product List',
-  'Total',
-  'Add To Cart',
-  'Check-out',
-  'Address',
-  'Status',
+  { key: 'cust', name: 'Customer' },
+  { key: 'plist', name: 'Product List' },
+  { key: 'total', name: 'Total' },
+  { key: 'cart', name: 'Add To Cart' },
+  { key: 'check', name: 'Check-out' },
+  { key: 'addr', name: 'Address' },
+  { key: 'status', name: 'Status' },
 ];
+
+const headerChecks = () => {
+  let obj = {};
+  headers.forEach(header => {
+    obj[header.key] = true;
+  });
+  return obj;
+};
 
 const status = ['paid', 'unpaid', 'done', 'shipping'];
 class Order extends Component {
-  state = { records: recordCreator(5, status.length) };
+  state = { records: recordCreator(5, status.length), checks: headerChecks() };
 
   formatAmount = amount => {
     return `$${new Intl.NumberFormat('en').format(amount)}`;
   };
 
+  changeHandler = key => {
+    const { checks } = this.state;
+    checks[key] = !checks[key];
+    this.setState({ checks });
+  };
+
   render() {
+    const { checks } = this.state;
     return (
       <Wrapper>
         <Control>
           <div>
             <Checkbox />
-            <Menu>{['Published', 'Unpublished']}</Menu>
+            <Menu>{status}</Menu>
           </div>
           <MenuButton name="edit section" type="edit">
             {headers.map(header => (
-              <MenuItem onClick={e => e.stopPropagation()}>
-                <Checkbox noarrow />
-                <HeaderName>{header}</HeaderName>
+              <MenuItem key={header.key} onClick={e => e.stopPropagation()}>
+                <Checkbox noarrow trigger={() => this.changeHandler(header.key)} />
+                <HeaderName>{header.name}</HeaderName>
               </MenuItem>
             ))}
           </MenuButton>
@@ -43,15 +58,21 @@ class Order extends Component {
 
         <StyledTable>
           <thead>
-            <tr>{headers.map((header, index) => <th>{header}</th>)}</tr>
+            <tr>
+              {headers.map(header => (
+                <TableHeader check={checks[header.key]} key={header.key}>
+                  {header.name}
+                </TableHeader>
+              ))}
+            </tr>
           </thead>
           <tbody>
             {this.state.records.map(record => (
-              <tr>
-                <td>{record.name}</td>
-                <td>
+              <tr key={record.id}>
+                <TableCell check={checks[headers[0].key]}>{record.name}</TableCell>
+                <TableCell check={checks[headers[1].key]}>
                   {record.productList.map(product => (
-                    <Product>
+                    <Product key={product.id}>
                       <div>{product.name}</div>
                       <Flex>
                         <div>{this.formatAmount(product.price)}</div>
@@ -59,29 +80,33 @@ class Order extends Component {
                       </Flex>
                     </Product>
                   ))}
-                </td>
-                <td>{this.formatAmount(record.total)}</td>
-                <td>
+                </TableCell>
+                <TableCell check={checks[headers[2].key]}>
+                  {this.formatAmount(record.total)}
+                </TableCell>
+                <TableCell check={checks[headers[3].key]}>
                   <div>{record.date.order.date}</div>
                   <span>{record.date.order.time}</span>
-                </td>
-                <td>
+                </TableCell>
+                <TableCell check={checks[headers[4].key]}>
                   <div>{record.date.checkout.date}</div>
                   <span>{record.date.checkout.time}</span>
-                </td>
-                <td>
+                </TableCell>
+                <TableCell check={checks[headers[5].key]}>
                   <div>
                     <div>{record.address.main}</div>
                     <span>{record.address.second}</span>
                   </div>
-                </td>
-                <td>
+                </TableCell>
+                <TableCell check={checks[headers[6].key]}>
                   <MenuButton type={status[record.statusIndex]} name={status[record.statusIndex]}>
-                    {status.map(header => (
-                      <StatusItem onClick={e => e.stopPropagation()}>{header}</StatusItem>
+                    {status.map((type, index) => (
+                      <StatusItem onClick={e => e.stopPropagation()} key={index}>
+                        {type}
+                      </StatusItem>
                     ))}
                   </MenuButton>
-                </td>
+                </TableCell>
               </tr>
             ))}
           </tbody>
@@ -188,4 +213,11 @@ const Product = styled.div`
   &:last-of-type {
     border-bottom: none;
   }
+`;
+
+const TableHeader = styled.th`
+  display: ${props => (props.check ? 'table-cell' : 'none')};
+`;
+const TableCell = styled.td`
+  display: ${props => (props.check ? 'table-cell' : 'none')};
 `;

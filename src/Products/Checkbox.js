@@ -6,8 +6,12 @@ class Checkbox extends Component {
     checked: true,
   };
   state = { checked: this.props.checked, id: btoa(Date.now()) };
-  changeHandler = () => {
+  changeHandler = e => {
     this.setState(({ checked }) => ({ checked: !checked }));
+    const trigger = this.props.trigger;
+    if (trigger) {
+      trigger();
+    }
   };
   render() {
     return (

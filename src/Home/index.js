@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import TransactionItem from './TransactionItem';
 import LastestOrderItem from './LastestOrderItem';
-import Toggler from './Products/Toggler';
+import Toggler from '../Products/Toggler';
 import Chart from 'chart.js';
-import { chartData } from './Products/helpers';
+import { chartData } from '../Products/helpers';
 class Home extends Component {
   chartRef = React.createRef();
   state = {

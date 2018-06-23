@@ -53,11 +53,12 @@ const setRecordDate = () => {
 export const recordCreator = (count = 1, statusCount) => {
   let records = [];
 
-  for (let i = 0; i < count; i++) {
+  for (let j = 0; j < count; j++) {
     let productList = [];
     let total = 0;
     for (let i = 0; i < faker.random.number({ min: 1, max: 5 }); i++) {
       const list = {
+        id: i,
         name: faker.lorem.words(),
         qty: faker.random.number({ min: 1, max: 5 }),
         price: Math.floor(faker.commerce.price(400, 3000, 0) / 100) * 100,
@@ -66,6 +67,7 @@ export const recordCreator = (count = 1, statusCount) => {
       productList.push(list);
     }
     records.push({
+      id: j,
       name: faker.name.findName(),
       date: setRecordDate(),
       address: {
